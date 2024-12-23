@@ -1,0 +1,68 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+android {
+    namespace 'com.android.settingslib'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 30
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+//        jvmTarget = '21'
+        jvmTarget = '1.8'
+    }
+
+    // 配置 Java 9 或以上版本时需要加上 java.compiler 模块
+    lintOptions {
+        checkReleaseBuilds false
+        // 或者设置其它lint选项
+    }
+}
+
+dependencies {
+    implementation libs.core.ktx
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.annotation
+    implementation libs.preference
+    implementation libs.window
+    implementation libs.lottie
+    implementation libs.javapoet
+    implementation files('libs\\jx-1.2.1.jar')
+    compileOnly files('libs\\iconloader.jar')
+    compileOnly files('libs\\WifiTrackerLibRes.jar')
+    compileOnly files('libs\\core-icu4j.jar')
+    compileOnly files('libs\\zxing-core-1.7.jar')
+    compileOnly files('libs\\iconloader.jar')
+    compileOnly files('libs\\SettingsLib.jar')
+    compileOnly files('libs\\setupdesign.jar')
+    compileOnly files('libs\\framework.jar')
+
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        Set<File> fileSet = options.bootstrapClasspath.getFiles();
+        List<File> newFileList = new ArrayList<>()
+        newFileList.add(new File("libs/framework.jar"))
+        newFileList.addAll(fileSet)
+        options.bootstrapClasspath = files(newFileList.toArray())
+    }
+}

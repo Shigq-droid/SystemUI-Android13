@@ -1,0 +1,66 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+android {
+    namespace 'com.android.systemui'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 30
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+//        jvmTarget = '17'
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.core.ktx
+    implementation libs.lottie
+    implementation libs.window
+    implementation libs.recyclerview
+    implementation libs.slice.core
+    implementation libs.slice.view
+    implementation libs.slice.builders
+    implementation libs.dagger
+    implementation libs.media3.session
+    implementation files('libs\\WifiTrackerLib.jar')
+    annotationProcessor libs.dagger.compiler
+    api project(path: ':SettingsLib')
+    api project(path: ':SystemUI-plugins')
+    compileOnly files('libs\\framework.jar')
+    implementation files('libs\\SystemUI-statsd.jar')
+    implementation files('libs\\SystemUISharedLib_Java.jar')
+    implementation files('libs\\SystemUISharedLib_Kotlin.jar')
+    implementation files('libs\\WindowManager-Shell.jar')
+    implementation files('libs\\iconloader.jar')
+
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        Set<File> fileSet = options.bootstrapClasspath.getFiles();
+        List<File> newFileList = new ArrayList<>()
+        newFileList.add(new File("libs/framework.jar"))
+        newFileList.addAll(fileSet)
+        options.bootstrapClasspath = files(newFileList.toArray())
+    }
+}
