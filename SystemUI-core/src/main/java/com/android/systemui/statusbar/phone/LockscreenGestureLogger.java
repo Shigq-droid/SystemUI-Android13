@@ -25,7 +25,7 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.EventLogConstants;
-import com.android.systemui.EventLogTags;
+//import com.android.systemui.EventLogTags;
 import com.android.systemui.dagger.SysUISingleton;
 
 import javax.inject.Inject;
@@ -107,7 +107,7 @@ public class LockscreenGestureLogger {
                 .addTaggedData(MetricsEvent.FIELD_GESTURE_LENGTH, length)
                 .addTaggedData(MetricsEvent.FIELD_GESTURE_VELOCITY, velocity));
         // also write old-style logs for backward-0compatibility
-        EventLogTags.writeSysuiLockscreenGesture(safeLookup(gesture), length, velocity);
+//        EventLogTags.writeSysuiLockscreenGesture(safeLookup(gesture), length, velocity);
     }
 
     /**

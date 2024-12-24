@@ -47,7 +47,7 @@ import com.android.systemui.dagger.qualifiers.Main;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.statusbar.NotificationMediaManager;
 
-import libcore.io.IoUtils;
+//import libcore.io.IoUtils;
 
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -143,7 +143,7 @@ public class LockscreenWallpaper extends IWallpaperManagerCallback.Stub implemen
                 Log.w(TAG, "Can't decode file", e);
                 return LoaderResult.fail();
             } finally {
-                IoUtils.closeQuietly(fd);
+//                IoUtils.closeQuietly(fd);
             }
         } else {
             if (selectedUser != null) {

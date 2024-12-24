@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.protobuf)
 }
 
 android {
@@ -42,7 +43,7 @@ dependencies {
     implementation libs.slice.builders
     implementation libs.dagger
     implementation libs.media3.session
-    implementation files('libs\\WifiTrackerLib.jar')
+    implementation libs.protobuf.java
     annotationProcessor libs.dagger.compiler
     api project(path: ':SettingsLib')
     api project(path: ':SystemUI-plugins')
@@ -52,7 +53,23 @@ dependencies {
     implementation files('libs\\SystemUISharedLib_Kotlin.jar')
     implementation files('libs\\WindowManager-Shell.jar')
     implementation files('libs\\iconloader.jar')
+    implementation files('libs\\WifiTrackerLib.jar')
+}
 
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.19.2'
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                remove java
+            }
+            task.builtins {
+                java {}// 生产java源码
+            }
+        }
+    }
 }
 
 gradle.projectsEvaluated {
@@ -64,3 +81,5 @@ gradle.projectsEvaluated {
         options.bootstrapClasspath = files(newFileList.toArray())
     }
 }
+
+

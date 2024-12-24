@@ -22,7 +22,7 @@ import android.util.AtomicFile
 import android.util.Log
 import android.util.Xml
 import com.android.systemui.backup.BackupHelper
-import libcore.io.IoUtils
+//import libcore.io.IoUtils
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.BufferedInputStream
@@ -138,7 +138,7 @@ class ControlsFavoritePersistenceWrapper(
                     atomicFile.failWrite(writer)
                     false
                 } finally {
-                    IoUtils.closeQuietly(writer)
+//                    IoUtils.closeQuietly(writer)
                 }
             }
             if (dataWritten) backupManager?.dataChanged()
@@ -174,7 +174,7 @@ class ControlsFavoritePersistenceWrapper(
         } catch (e: IOException) {
             throw IllegalStateException("Failed parsing favorites file: $file", e)
         } finally {
-            IoUtils.closeQuietly(reader)
+//            IoUtils.closeQuietly(reader)
         }
     }
 

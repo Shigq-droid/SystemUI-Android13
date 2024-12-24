@@ -78,10 +78,10 @@ class MediaArtworkProcessor @Inject constructor() {
             blur.forEach(output)
             output.copyTo(outBitmap)
 
-            val swatch = MediaNotificationProcessor.findBackgroundSwatch(artwork)
-
-            val canvas = Canvas(outBitmap)
-            canvas.drawColor(ColorUtils.setAlphaComponent(swatch.rgb, COLOR_ALPHA))
+//            val swatch = MediaNotificationProcessor.findBackgroundSwatch(artwork)
+//
+//            val canvas = Canvas(outBitmap)
+//            canvas.drawColor(ColorUtils.setAlphaComponent(swatch.rgb, COLOR_ALPHA))
             return outBitmap
         } catch (ex: IllegalArgumentException) {
             Log.e(TAG, "error while processing artwork", ex)

@@ -128,7 +128,7 @@ import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.DejankUtils;
-import com.android.systemui.EventLogTags;
+//import com.android.systemui.EventLogTags;
 import com.android.systemui.InitController;
 import com.android.systemui.Prefs;
 import com.android.systemui.R;
@@ -1993,8 +1993,8 @@ public class CentralSurfacesImpl extends CoreStartable implements
                     Log.d(TAG, "converting a heads up to fullScreen");
                 }
                 try {
-                    EventLog.writeEvent(EventLogTags.SYSUI_HEADS_UP_ESCALATION,
-                            sbn.getKey());
+//                    EventLog.writeEvent(EventLogTags.SYSUI_HEADS_UP_ESCALATION,
+//                            sbn.getKey());
                     wakeUpForFullScreenIntent();
                     notification.fullScreenIntent.send();
                     entry.notifyFullScreenIntentLaunched();
@@ -2136,9 +2136,9 @@ public class CentralSurfacesImpl extends CoreStartable implements
         //   split between NotificationPanelViewController and here.)
         if (DEBUG_GESTURES) {
             if (event.getActionMasked() != MotionEvent.ACTION_MOVE) {
-                EventLog.writeEvent(EventLogTags.SYSUI_STATUSBAR_TOUCH,
-                        event.getActionMasked(), (int) event.getX(), (int) event.getY(),
-                        mDisabled1, mDisabled2);
+//                EventLog.writeEvent(EventLogTags.SYSUI_STATUSBAR_TOUCH,
+//                        event.getActionMasked(), (int) event.getX(), (int) event.getY(),
+//                        mDisabled1, mDisabled2);
             }
 
         }
